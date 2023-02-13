@@ -14,8 +14,8 @@ The files in this folder are for the Docker color detector program.
 ## Exercise 2 - ROS and Kinematics.
 The goal of this exercise was learning different components of ROS, the Basic application of
 Robotic Kinematics and Odometry.
-Additional contributor: Austin Tralnberg: atralnbe@ualberta.ca
 To run this code, make sure you are in the directory containing the `Dockerfile` and run `dts devel build -f -H <hostname>.local` and `dts devel run -H <hostname>.local`, where `<hostname>` is the name of the duckiebot you will be running this program on.
+#### Additional contributor: Austin Tralnberg: atralnbe@ualberta.ca
 
 ## Exercise 3 - Computer Vision in Robotics.
 In this lab, we will be implementing the use of Computer Vision with our duckiebots.
