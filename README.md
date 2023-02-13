@@ -4,8 +4,8 @@ This repository contains the submissions for all CMPUT 412 Winter 2023 lab assig
 Moyinoluwa Famobiwo: famobiwo@ualberta.ca
 
 ## Installing and Running the Code
-If you would simply like to run the code or make changes to this repository, you can copy the link to the repository from the green button labelled `<> Code` at the top right, and run `git clone <repository_url>`.
-If you would like your own separate version, you can fork the repository by clicking the button labelled `Fork` at the top right of the page.
+If you would simply like to run the code or make changes to this repository, you can copy the link to the repository from the green button labelled "<> Code" at the top right, and run `git clone <repository_url>`.
+If you would like your own separate version, you can fork the repository by clicking the button labelled "Fork" at the top right of the page.
 
 ## Exercise 1 - Our Intro to ROS and Duckietown exercise. 
 This exercise is about learning the basic knowledge and skills you need to operate a Duckiebot.
