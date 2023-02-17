@@ -90,6 +90,3 @@ plt.ylabel("Y (metres)")
 plt.plot(xpoints, ypoints)
 plt.savefig("/data/logs/xworld_vs_yworld.png")
 plt.clf()
-
-
->>>>>>> 51a9d3a43969793fa8797d8517df910d6177995b
