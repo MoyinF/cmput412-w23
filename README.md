@@ -27,5 +27,6 @@ For solutions to part 1.2 of the exercise, please visit packages/apriltag_detect
 For solutions to part 2 of the exercise, please visit packages/lane_following
 
 The remainder of the exercise has code that spans both packages/apriltag_detector and packages/deadreckoning
+
 To run this code, make sure you are in the directory containing the `Dockerfile` and run `dts devel build -f -H <hostname>.local` and then `dts devel run -H <hostname>.local`, where `<hostname>` is the name of the duckiebot you will be running this program on.
 #### Additional contributor: Austin Tralnberg: atralnbe@ualberta.ca
