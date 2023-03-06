@@ -1,47 +1,13 @@
-# Template: template-ros
+## Exercise 3 - Computer Vision in Robotics.
+This exercise provided an introduction to computer vision and localization in robotics. It builds on top of the deadreckoning techniques developed in exercise 2, using fiducial markers to enable better pose estimation in the environment.
 
-This template provides a boilerplate repository
-for developing ROS-based software in Duckietown.
+For solutions to part 1.1 of the exercise, please visit packages/augmented_reality_basics and packages/augmented_reality_apriltag
 
-**NOTE:** If you want to develop software that does not use
-ROS, check out [this template](https://github.com/duckietown/template-basic).
+For solutions to part 1.2 of the exercise, please visit packages/apriltag_detector
 
+For solutions to part 2 of the exercise, please visit packages/lane_following
 
-## How to use it
+The remainder of the exercise has code that spans both packages/apriltag_detector and packages/deadreckoning
 
-### 1. Fork this repository
-
-Use the fork button in the top-right corner of the github page to fork this template repository.
-
-
-### 2. Create a new repository
-
-Create a new repository on github.com while
-specifying the newly forked template repository as
-a template for your new repository.
-
-
-### 3. Define dependencies
-
-List the dependencies in the files `dependencies-apt.txt` and
-`dependencies-py3.txt` (apt packages and pip packages respectively).
-
-
-### 4. Place your code
-
-Place your code in the directory `/packages/` of
-your new repository.
-
-
-### 5. Setup launchers
-
-The directory `/launchers` can contain as many launchers (launching scripts)
-as you want. A default launcher called `default.sh` must always be present.
-
-If you create an executable script (i.e., a file with a valid shebang statement)
-a launcher will be created for it. For example, the script file 
-`/launchers/my-launcher.sh` will be available inside the Docker image as the binary
-`dt-launcher-my-launcher`.
-
-When launching a new container, you can simply provide `dt-launcher-my-launcher` as
-command.
+To run this code, make sure you are in the directory containing the `Dockerfile` and run `dts devel build -f -H <hostname>.local` and then `dts devel run -H <hostname>.local`, where `<hostname>` is the name of the duckiebot you will be running this program on.
+#### Additional contributor: Austin Tralnberg: atralnbe@ualberta.ca
