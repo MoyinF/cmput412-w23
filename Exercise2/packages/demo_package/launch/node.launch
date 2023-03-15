@@ -1,0 +1,10 @@
+<launch>
+
+  <group ns="$(arg veh)">  
+
+    <node pkg="demo_package" type="odometry_node.py" name="odometry_node" output="screen" />
+    <node pkg="demo_package" type="controller_node.py" name="controller_node" output="screen" />
+
+   </group>
+
+</launch>

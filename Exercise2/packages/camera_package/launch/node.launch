@@ -1,0 +1,12 @@
+<launch>
+
+  <group ns="$(arg veh)">  
+
+    <node pkg="camera_package" type="camera_pub_sub_node.py" name="camera_pub_sub_node" output="screen">
+        <remap from="input_image" to="/$(arg veh)/camera_node/image/compressed"/>
+        <remap from="output_image" to="/$(arg veh)/camera_node/image/republished/compressed"/>
+    </node>
+
+   </group>
+
+</launch>
