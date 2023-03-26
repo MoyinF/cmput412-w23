@@ -42,3 +42,10 @@ Implementation details:
 Our duckiebot tailing node communicates with the duckiebot detection node and distance node which help determine whether there is a duckiebot in the frame and the distance to the duckiebot if present. If there is a duckiebot in the frame a PID controller controls the velocity to ensure our bot follows the leading duckiebot without crashing. 
 If there is no duckiebot within the frame, a separate PID controller is used to execute lane following behaviour with proper road etiquette.
 #### Additional contributor: Austin Tralnberg: atralnbe@ualberta.ca
+
+## Exercise 5 - Machine Learning for Robotics
+In this exercise, we implement a program for our duckiebot to detect and accurately decipher digits. Detection is done using april tags and deciphering is done using a trained neural network. We implement a duckiebot node which communicates with a ROS node on an external computer. This is necessary as the duckiebot's memory is not sufficient for running the neural network.
+
+To run this code, navigate to the `local` directory containing the `Dockerfile` and run `dts devel build -f -H <hostname>.local` and then `dts devel run -H <hostname>.local`, where `<hostname>` is the name of the duckiebot you will be running this program on e.g. `csc229XX.local`.
+To run the laptop package, navigate to the `remote` directory and run `dts devel build -f && dts devel run -R <hostname>.local`
+#### Additional contributor: Austin Tralnberg: atralnbe@ualberta.ca
