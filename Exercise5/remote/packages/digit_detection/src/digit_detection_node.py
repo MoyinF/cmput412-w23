@@ -12,7 +12,7 @@ from std_msgs.msg import Float32, Int32
 import cv2
 from cv_bridge import CvBridge, CvBridgeError
 import numpy as np
-from multilayer_perceptron_eval import DigitPredictor
+from eval import DigitPredictor
 
 from digit_detection.srv import DetectionService, DetectionServiceResponse
 
@@ -34,12 +34,12 @@ class DigitDetectionNode(DTROS):
         # MLP model
         self.INPUT_H = 28
         self.INPUT_W = 28
-        self.INPUT_DIM = self.INPUT_H * self.INPUT_W * 3
+        self.INPUT_DIM = self.INPUT_H * self.INPUT_W
         self.OUTPUT_DIM = 10
 
         self.rospack = rospkg.RosPack()
         model_path = self.rospack.get_path("digit_detection") + "/src/" + self.model_name
-        
+
         self.predictor = DigitPredictor(model_path, self.INPUT_DIM, self.OUTPUT_DIM)
 
     def detect_digit(self, img_msg):
@@ -54,10 +54,10 @@ class DigitDetectionNode(DTROS):
         # reformat the image to the appropriate 28 * 28 size
         # cv_image = cv2.resize(cv_image, (self.INPUT_H, self.INPUT_W))
         # cv_image = self.mask_img(cv_image)
-        
+
         # predict the digit
         digit = self.predictor.predict(cv_image)
-        
+
         # return the result
         return DetectionServiceResponse(Int32(digit))
 

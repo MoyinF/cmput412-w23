@@ -7,6 +7,7 @@ import torch.utils.data as data
 from torch.utils.data import Dataset, DataLoader
 
 from multilayer_perceptron import MLP
+from convolutional_nn import CNN
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -25,49 +26,89 @@ torch.manual_seed(SEED)
 torch.cuda.manual_seed(SEED)
 torch.backends.cudnn.deterministic = True
 
+DEBUG = False
+model_is_mlp = False
+
+def blue_mask(image):
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        # blue colors
+        lower_range = np.array([86, 66, 95])
+        upper_range = np.array([179,255,255])
+        mask = cv2.inRange(hsv, lower_range, upper_range)
+        # With canny edge detection:
+        edged = cv2.Canny(mask, 30, 200)
+
+        return mask
+
+def mask_img(img):
+    # take in cv_image # if img is filename: im = cv2.imread(f'{img}')
+    im = blue_mask(img)
+
+    # add line(s) around border to prevent floodfilling the digits
+    # cv2.line(im, (0,28), (28,28), (255, 255, 255), 1)
+    # cv2.line(im, (0,self.INPUT_W), (self.INPUT_H,self.INPUT_W), (255, 255, 255), 1)
+    # cv2.line(im, (0,self.INPUT_W), (self.INPUT_H,self.INPUT_W), (255, 255, 255), 1)
+    # cv2.line(im, (0,self.INPUT_W), (self.INPUT_H,self.INPUT_W), (255, 255, 255), 1)
+    global DEBUG
+    if DEBUG:
+        cv2.imshow("image", im)
+        cv2.waitKey(1000)
+        cv2.destroyWindow("image")
+
+    # im = cv2.copyMakeBorder(im, 1, 1, 1, 1, cv2.BORDER_CONSTANT, None, value = 0)
+    # cv2.floodFill(im, None, (0, 28), 255)
+    # cv2.floodFill(im, None, (28, 0), 255)
+    # cv2.floodFill(im, None, (0, 0), 255)
+    # cv2.floodFill(im, None, (28, 28), 255)
+    im = cv2.resize(im, (28, 28))
+    # im = cv2.bitwise_not(im)
+    return im
+
 class CustomDataset(Dataset):
     def __init__(self):
         self.imgs_path = "test_images/"
         file_list = glob.glob(self.imgs_path + "*")
         # print(file_list)
-        
+
         self.data = []
         for class_path in file_list:
             class_name = class_path.split("/")[-1]
             for img_path in glob.glob(class_path + "/*.jpg"):
                 self.data.append([img_path, class_name])
         # print(self.data)
-        
+
         self.class_map = {
-            "0": 0, 
-            "1": 1, 
-            "2": 2, 
-            "3": 3, 
-            "4": 4, 
-            "5": 5, 
-            "6": 6, 
-            "7": 7, 
-            "8": 8, 
+            "0": 0,
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
             "9": 9
         }
 
         self.img_dim = (28, 28)
-    
+
     def __len__(self):
         return len(self.data)
-        
+
     def __getitem__(self, idx):
         img_path, class_name = self.data[idx]
-        
+        # same steps as in prepare_input in eval.py
         img = cv2.imread(img_path)
         img = cv2.resize(img, self.img_dim)
+        # img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        img = mask_img(img)
         img_tensor = torch.from_numpy(img)
-        
+
         class_id = self.class_map[class_name]
         class_id = torch.tensor(class_id)
-        
+
         return img_tensor.float(), class_id
-        
+
 def calculate_accuracy(y_pred, y):
     top_pred = y_pred.argmax(1, keepdim=True)
     correct = top_pred.eq(y.view_as(top_pred)).sum()
@@ -88,7 +129,10 @@ def train(model, iterator, optimizer, criterion, device):
 
         optimizer.zero_grad()
 
-        y_pred, _ = model(x)
+        if model_is_mlp:
+            y_pred, _ = model(x) # for MLP
+        else:
+            y_pred = model(x) # for CNN
 
         loss = criterion(y_pred, y)
 
@@ -117,7 +161,10 @@ def evaluate(model, iterator, criterion, device):
             x = x.to(device)
             y = y.to(device)
 
-            y_pred, _ = model(x)
+            if model_is_mlp:
+                y_pred, _ = model(x) # for MLP
+            else:
+                y_pred = model(x) # for CNN
 
             loss = criterion(y_pred, y)
 
@@ -151,7 +198,13 @@ print(f'Number of training examples: {len(train_data)}')
 print(f'Number of validation examples: {len(valid_data)}')
 print(f'Number of testing examples: {len(test_data)}')
 
-BATCH_SIZE = 64
+BATCH_SIZE = 1 # for CNN
+
+if model_is_mlp:
+    BATCH_SIZE = 64 # for MLP
+else:
+    BATCH_SIZE = 1 # for CNN
+
 train_iterator = data.DataLoader(train_data,
                                  shuffle=True,
                                  batch_size=BATCH_SIZE)
@@ -164,10 +217,14 @@ test_iterator = data.DataLoader(test_data,
 
 
 
-INPUT_DIM = 28 * 28 * 3
+INPUT_DIM = 28 * 28
 OUTPUT_DIM = 10
 
-model = MLP(INPUT_DIM, OUTPUT_DIM)
+model = None
+if model_is_mlp:
+    model = MLP(INPUT_DIM, OUTPUT_DIM)
+else:
+    model = CNN()
 
 optimizer = optim.Adam(model.parameters())
 
@@ -179,7 +236,7 @@ model = model.to(device)
 criterion = criterion.to(device)
 
 
-EPOCHS = 20
+EPOCHS = 10
 
 best_valid_loss = float('inf')
 
