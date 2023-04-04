@@ -1,5 +1,6 @@
 # CMPUT 412 - WINTER 2023
 This repository contains the submissions for all CMPUT 412 Winter 2023 lab assignments.
+For more information, visit: [My CMPUT 412 Website](https://sites.google.com/ualberta.ca/famobiwo-cmput-412/)
 ### Contributors
 Moyinoluwa Famobiwo: famobiwo@ualberta.ca
 
