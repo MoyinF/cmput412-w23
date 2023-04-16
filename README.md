@@ -50,3 +50,34 @@ In this exercise, we implement a program for our duckiebot to detect and accurat
 To run this code, navigate to the `local` directory containing the `Dockerfile` and run `dts devel build -f -H <hostname>.local` and then `dts devel run -H <hostname>.local`, where `<hostname>` is the name of the duckiebot you will be running this program on e.g. `csc229XX.local`.
 To run the laptop package, navigate to the `remote` directory and run `dts devel build -f && dts devel run -R <hostname>.local`
 #### Additional contributor: Austin Tralnberg: atralnbe@ualberta.ca
+
+## Final Project - Autonomous Driving with Duckietown
+
+In this final project, students were challenged to create a program that enables a duckiebot to traverse duckietown, whilst collecting points for completing various behaviours. There are three stages in the town, each with a unique set of objectives that the robot had to meet. The final project represents a synthesis of all the exercises that preceded it. Students were encouraged to draw upon their learnings in computer vision, machine learning, localization, and odometry as needed, selecting the most appropriate techniques to find an optimal solution to the tasks.
+
+This repository contains implementation solutions for the final project. For information about the project, please read the [report](https://sites.google.com/ualberta.ca/famobiwo-cmput-412/labs/final-project).
+
+To set the stall parameter, as well as other parameters such as wheel velocities, omega values, stopping distances, etc., ssh into the duckiebot and create a file in the `/data/` folder titled `final_config.yaml`. The exact file we used is in this repository. You can change the numbers in `/data/final_config.yaml`, for example with the following steps:
+
+```
+ssh duckie@csc229xx.local # where csc229xx is the duckiebot's hostname
+vim /data/final_config.yaml # creates or opens the stall file, where you write the number of the stall and save
+```
+
+To run the program, ensure that the variable `$BOT` stores your robot's host name (ie. `csc229xx`), and run the following commands:
+
+```
+dts devel build -f -H $BOT.local
+dts devel run -H $BOT.local
+```
+
+The program shuts down automatically after completing stage 3.
+To shutdown the program before that, enter `CTRL + C` in your terminal.
+
+### Credit:
+
+This code is built from the Duckiebot detections starter code by Zepeng Xiao (https://github.com/XZPshaw/CMPUT412503_exercise4).
+Autonomous lane following code was also borrowed from Justin Francis.
+Build on top of by Nadeen Mohamed, Moyinoluwa Famobiwo, and Austin Tralnberg.
+#### Additional contributors: Austin Tralnberg: atralnbe@ualberta.ca, Nadeen Mohamed: nadeen@ualberta.ca
+
