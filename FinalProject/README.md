@@ -9,7 +9,7 @@ Individual reports are hosted at:
 
 ## Structure
 
-The package for autonomous driving is: driver. We will discuss the execution of the python source files for each package (which are located inside the packages `src` folder).
+The package for autonomous driving is: driver. We will discuss the execution of the python source files for each package (which are located inside the package's `src` folder).
 
 ## Execution:
 
