@@ -3,13 +3,14 @@
 This repository contains implementation solutions for the final project. For information about the project, please read the [report](https://sites.google.com/ualberta.ca/famobiwo-cmput-412/labs/final-project).
 Individual reports are hosted at:
 
-<!-- TODO: add URLs -->
-
-[Nadeen Mohamed's site](), [Moyinoluwa Famobiwo's site](https://sites.google.com/ualberta.ca/famobiwo-cmput-412/labs/final-project) or [Austin Tralnberg's Site]()
+- [Moyinoluwa Famobiwo's site](https://sites.google.com/ualberta.ca/famobiwo-cmput-412/labs/final-project)
+- [Nadeen Mohamed's site](https://sites.google.com/ualberta.ca/nadeen-cmput-412/written-reports/final-project)
+- [Austin Tralnberg's Site]()
 
 ## Structure
 
 The package for autonomous driving is: driver. We will discuss the execution of the python source files for each package (which are located inside the package's `src` folder).
+- `driver/driver_node.py`: Code for the node that implements all three stages of the final project. The node implements all three stages in different methods.
 
 ## Execution:
 
@@ -17,7 +18,7 @@ To set the stall parameter, as well as other parameters such as wheel velocities
 
 ```
 ssh duckie@csc229xx.local # where csc229xx is the duckiebot's hostname
-vim /data/final_config.yaml # creates or opens the stall file, where you write the number of the stall and save
+vim /data/final_config.yaml # creates or opens the config file, where you edit the configurations (an example is given in final_config.yaml)
 ```
 
 To run the program, ensure that the variable `$BOT` stores your robot's host name (ie. `csc229xx`), and run the following commands:
@@ -37,7 +38,3 @@ This code is built from the Duckiebot detections starter code by Zepeng Xiao (ht
 Build on top of by Nadeen Mohamed, Moyinoluwa Famobiwo, and Austin Tralnberg.
 
 Autonomous lane following code was also borrowed from Justin Francis.
-
-<!-- Code was also borrowed (and cited in-code) from the following sources: -->
-
-<!-- TODO: add code sources -->
