@@ -38,3 +38,5 @@ This code is built from the Duckiebot detections starter code by Zepeng Xiao (ht
 Build on top of by Nadeen Mohamed, Moyinoluwa Famobiwo, and Austin Tralnberg.
 
 Autonomous lane following code was also borrowed from Justin Francis.
+
+#### Additional contributors: Austin Tralnberg: atralnbe@ualberta.ca, Nadeen Mohamed: nadeen@ualberta.ca
